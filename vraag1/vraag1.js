@@ -13,10 +13,13 @@ function isGeldigeInput(input)
     return "";
 }
 
-function schrijfNaarPagina(tekst)
+function schrijfNaarPagina(tekst, className)
 {
-    var p = document.getElementById("console");
-    p.innerHTML += tekst + "<br/>";
+    var div = document.getElementById("console");
+    var p = document.createElement("p");
+    p.innerHTML = tekst;
+    p.className = className;
+    div.appendChild(p);
 }
 
 function vraagEnBeoordeelGetallen()
@@ -30,9 +33,9 @@ function vraagEnBeoordeelGetallen()
             alert(feedback);
         else
             if(isPriem(getal))
-                schrijfNaarPagina(getal + " is een priemgetal");
+                schrijfNaarPagina(getal + " is een priemgetal", "priem");
             else
-                schrijfNaarPagina(getal + " is geen priemgetal");
+                schrijfNaarPagina(getal + " is geen priemgetal", "geenPriem");
         
         getal = prompt("Geef nog een strikt positief getal ('stop' om te stoppen)");
         getal = getal.toLowerCase();
