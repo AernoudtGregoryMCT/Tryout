@@ -22,7 +22,7 @@ function schrijfNaarPagina(tekst, className)
     div.appendChild(p);
 }
 
-function vraagEnBeoordeelGetallen()
+/*function vraagEnBeoordeelGetallen()
 {
     var getal = prompt("Geef een strikt positief getal ('stop' om te stoppen)");
     getal = getal.toLowerCase();
@@ -36,12 +36,30 @@ function vraagEnBeoordeelGetallen()
                 schrijfNaarPagina(getal + " is een priemgetal", "priem");
             else
                 schrijfNaarPagina(getal + " is geen priemgetal", "geenPriem");
-        
+
         getal = prompt("Geef nog een strikt positief getal ('stop' om te stoppen)");
         getal = getal.toLowerCase();
     }
     alert("Gedaan!");
+}*/
+
+function buttonClicked()
+{
+    var input = document.getElementById("input");
+    var getal = input.value;
+    var feedback = isGeldigeInput(getal);
+    if(feedback != "")
+        alert(feedback);
+    else
+        if(isPriem(getal))
+            schrijfNaarPagina(getal + " is een priemgetal", "priem");
+        else
+            schrijfNaarPagina(getal + " is geen priemgetal", "geenPriem");
+    input.value = "";
+    input.focus();
 }
 
-setTimeout(vraagEnBeoordeelGetallen, 1000);
+document.getElementById("controleerGetal").addEventListener("click", buttonClicked);
+
+//setTimeout(vraagEnBeoordeelGetallen, 1000);
 //window.onload = vraagEnBeoordeelGetallen; // werkt niet - javascript wordt uitgevoerd voor/tijdens laden
