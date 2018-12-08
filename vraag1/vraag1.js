@@ -1,8 +1,22 @@
 function isPriem(getal)
 {
+    if(getal == 1) return false;
     for(var i = 2; i < getal; i++)
         if(getal % i == 0) return false;
     return true;
+}
+
+function isGeldigeInput(input)
+{
+    if(isNaN(input)) return input + " is geen nummer";
+    if(input <= 0) return input + " is geen strikt positief getal";
+    return "";
+}
+
+function schrijfNaarPagina(tekst)
+{
+    var p = document.getElementById("console");
+    p.innerHTML += tekst + "<br/>";
 }
 
 function vraagEnBeoordeelGetallen()
@@ -11,27 +25,19 @@ function vraagEnBeoordeelGetallen()
     getal = getal.toLowerCase();
     while(getal != "stop")
     {
-        while(isNaN(getal) && getal != "stop")
-        {
-            getal = prompt(getal + " is geen getal. Geef een getal! ('stop' om te stoppen)");
-        }
-        if(!isNaN(getal))
-        {
-            alert("we hebben al een getal");
-            while(getal <= 0 && getal != "stop")
-            {
-                getal = prompt(getal + " is geen strikt positief getal. Geef een strikt positief getal! ('stop' om te stoppen)");
-            }
-            if(!isNaN(getal))
-            {
-                if(isPriem(getal))
-                    alert(getal + " is een priemgetal");
-                else
-                    alert(getal + " is geen priemgetal");
-            }
-            getal = prompt("Geef nog een strikt positief getal ('stop' om te stoppen)");
-        }
+        var feedback = isGeldigeInput(getal);
+        if(feedback != "")
+            alert(feedback);
+        else
+            if(isPriem(getal))
+                schrijfNaarPagina(getal + " is een priemgetal");
+            else
+                schrijfNaarPagina(getal + " is geen priemgetal");
+        
+        getal = prompt("Geef nog een strikt positief getal ('stop' om te stoppen)");
+        getal = getal.toLowerCase();
     }
+    alert("Gedaan!");
 }
 
 setTimeout(vraagEnBeoordeelGetallen, 1000);
